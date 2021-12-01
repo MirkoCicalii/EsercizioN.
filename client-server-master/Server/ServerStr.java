@@ -72,9 +72,11 @@ public void comunica()
         }
 
 // CONTROLLO SE IL NUMERO È UNO DOPO L'ALTRO
-        for(int i = 0 ; i< a.size(); i++){
-            if ( a.get(i).equals(a.get(i+1)-1))
-        }
+        //for(int i = 0 ; i< a.size(); i++){
+            //if ( a.get(i).equals(a.get(i)) && a.get(i).equals(a.get(i+2)) && a.get(i).equals(a.get(i+2)) && a.get(i).equals(a.get(i+3)) && a.get(i).equals(a.get(i+4))){
+                //outVersoClient.writeBytes("Vittoria "+ '\n');
+            //}
+        //}
 
 
 
