@@ -7,12 +7,13 @@ public class ServerStr
     ServerSocket server = null;
     Socket client = null;
     String operazione = null;
-    String numero1=null;
-    String numero2=null;
+    String numero=null;
     String stringaricevuta=null;
     String stringaModificata = null;
     int risultato=0;
     String Risultato=null;
+    Vector <String> a= new Vector<String>(); // Dovrebbe essere Integer
+
 
     BufferedReader inDalClient;
     DataOutputStream outVersoClient;
@@ -46,56 +47,37 @@ public void comunica()
     try
     {
         for(;;){
-             outVersoClient.writeBytes("Dammi il primo numero"+'\n');
-             numero1 = inDalClient.readLine();
-             System.out.println ("numero 1 : " +numero1);
-
-             outVersoClient.writeBytes("Dammi il secondo numero"+'\n');
-             numero2 = inDalClient.readLine();
-             System.out.println ("numero 2 : " +numero2);
-
-             outVersoClient.writeBytes("scegli operazione da eseguire"+'\n');
-             operazione = inDalClient.readLine();
-             System.out.println ("operazione : " +operazione);
-
-            int Numero1=Integer.parseInt(numero1);
-            int Numero2=Integer.parseInt(numero2);
-
-            switch(operazione){
-                case "+":
-                risultato=Numero1+Numero2;
-                Risultato=Integer.toString(risultato);
-                outVersoClient.writeBytes("risultato: " + Risultato + '\n');
-                break;
-
-                case "-":
-                risultato=Numero1-Numero2;
-                Risultato=Integer.toString(risultato);
-                outVersoClient.writeBytes("risultato: " + Risultato + '\n');
-                break;
-
-                case "*":
-                risultato=Numero1*Numero2;
-                Risultato=Integer.toString(risultato);
-                outVersoClient.writeBytes("risultato: " + Risultato + '\n');
-                break;
-
-                case "/":
-                risultato=Numero1/Numero2;
-                Risultato=Integer.toString(risultato);
-                outVersoClient.writeBytes("risultato: " + Risultato + '\n');
-                break;
-
+                  
+            
+             outVersoClient.writeBytes("Dammi il numero estratto (scritto) per visualizzare i numeri inseriti digitare VISUALIZZA"+'\n');
+             numero = inDalClient.readLine();
+             outVersoClient.writeBytes("Numeri estratti: "+ numero +'\n');
+             if(numero.equals("VISUALIZZA")){
+                outVersoClient.writeBytes("la lista delle note è: "+'\n');
+                for(int i=0;i<a.size();i++){
+                    outVersoClient.writeBytes(a.get(i)+'\n');
+                }
             }
-            outVersoClient.writeBytes("Vuoi effettuare un nuovo calcolo (Y/N)?"+'\n');
-            stringaricevuta=inDalClient.readLine();
-            if(stringaricevuta.equals("N")){
-                outVersoClient.writeBytes("socket in chiusura"+'\n');
-                client.close();
-                break;
-            }
+            
+                else{
+                    a.add(numero);
+                    System.out.println("stringa dal cliente: "+ numero);
+                    outVersoClient.writeBytes("numero salvato con sucesso"+'\n');
+                }
+             
+             
+             
+             
              
         }
+
+// CONTROLLO SE IL NUMERO È UNO DOPO L'ALTRO
+        for(int i = 0 ; i< a.size(); i++){
+            if ( a.get(i).equals(a.get(i+1)-1))
+        }
+
+
+
     }
     catch (Exception e)
     {

@@ -14,7 +14,7 @@ public class ClientStr {
     BufferedReader inDalServer;
 
     public Socket connetti(){
-        System.out.println("2 CLIENT partito in esecuzione ...");
+        System.out.println("CLIENT partito in esecuzione ...");
         try
         {
             tastiera= new BufferedReader(new InputStreamReader(System.in));
@@ -22,7 +22,7 @@ public class ClientStr {
             outVersoServer = new DataOutputStream(miosocket.getOutputStream());
             inDalServer = new BufferedReader(new InputStreamReader(miosocket.getInputStream()));
             stringRicevutaDalServer=inDalServer.readLine();
-             System.out.println("server: "+stringRicevutaDalServer);
+            System.out.println("server: "+stringRicevutaDalServer);
         }
         catch (UnknownHostException a){
             System.err.println("Host sconosciuto");
@@ -40,28 +40,24 @@ public class ClientStr {
          try{
              for(;;){
              stringRicevutaDalServer=inDalServer.readLine();
-             System.out.println("server: "+stringRicevutaDalServer);
+             System.out.println("server1: "+ stringRicevutaDalServer);
              stringUtente = tastiera.readLine();
+             System.out.println("invio la stringa al server e attendo..." +  stringUtente);
              outVersoServer.writeBytes( stringUtente+'\n');
-
              stringRicevutaDalServer=inDalServer.readLine();
-             System.out.println("server: "+stringRicevutaDalServer);
-             stringUtente = tastiera.readLine(); 
-             outVersoServer.writeBytes( stringUtente+'\n');
-             
-             stringRicevutaDalServer=inDalServer.readLine();
-             System.out.println("server: "+stringRicevutaDalServer);
-             stringUtente = tastiera.readLine();
-             outVersoServer.writeBytes( stringUtente+'\n');
-             
-
-             stringRicevutaDalServer=inDalServer.readLine();
-             System.out.println("server: "+stringRicevutaDalServer);
-             stringRicevutaDalServer=inDalServer.readLine();
-             System.out.println("server: "+stringRicevutaDalServer);
-             stringUtente = tastiera.readLine();
-             outVersoServer.writeBytes( stringUtente+'\n');
-             
+             if (stringUtente.equals("VISUALIZZA")) {
+                for (;;) {
+                    stringRicevutaDalServer = inDalServer.readLine();
+                        if (stringRicevutaDalServer.equals("Fine")) {
+                            break;
+                        }
+                    System.out.println("server2: " + stringRicevutaDalServer);
+                    
+                }
+            } else {
+                stringRicevutaDalServer = inDalServer.readLine();
+                System.out.println("server3: " + stringRicevutaDalServer);
+            }            
              
              }
          }
